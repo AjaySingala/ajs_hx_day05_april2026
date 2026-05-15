@@ -1,0 +1,405 @@
+
+Day 01:
+=======
+AI: Machines mimic human behavior
+	- to get things done faster and probably, more efficiently.
+- Machine Learning (ML)
+	- technical, programming mainly Python
+	- huge amount of data and try to identify/recognize patterns in that data
+		- the data, more often than not - 2D -> Rows & Columns
+	- visualizations, charts, predictions
+- Deep Learning (DL)
+	- data has moved from 2D to nD
+	- identifying images, text within within images
+	- images, videos
+	- technical, use complex algorithms - Neural Networks (NN)
+- Gen AI (Advanced DL)
+	- no longer about identifying images
+	- but to generate "content" -> text, images, videos, emails, summary, audio.
+	- Oct/Nov 2022 when ChatGPT launched
+- Agentic AI
+	- autonmous "agents" (systems/workflows)
+	- run on their own, even take certain decisions to complete specific tasks
+- MCP (Model Context Protocol) & Skills
+
+AI - no longer just a "tool". It is now a team member.
+
+LLM -> Large Language Model
+- Brain behind "Gen AI"
+- ChatGPT -> interface (UI) to something that does the work in the background.
+	- that "background" is AI Model / LLM
+- Large: It has been trained on a large amount of  data
+	- data come from? -> all over the internet from public domain
+		- OpenAI, Google, Microsoft
+- Language:
+	- Machines do not undertand human language
+	- Machines can only understand numbers
+	- Words are represented as "a sequence of numbers" -> encoded Tokens.
+		- words, punctuations, special characters
+	- LLMs (models) are trained to understand the significance of words with every other word in a given context.
+	- A word could have a different meaning in different contexts:
+		- Bank
+			- Financial bank
+			- The bank of a river
+			- Blood bank
+	- Very complex & advanced NN used to do this.
+	
+LLM -> 3 types of messages to it
+1) System message: define the behavior of the model
+	- role you want it to play
+	"You are an expert in Python programming"
+	"You are a senior legal expert"
+	- By default, every LLM has a system prompt.
+		- "personal assistant"
+2) User Message: the task it has to complete.
+3) AI Message (Assistant Message): Response from the LLM (model)
+
+Bank- 9950 - the token does not change even if the context changes
+- Dictionary
+	- LLMs / Models -> Vocabulary - a unique set of tokens
+	- models may not have tokens for certain words
+	- words are represented with >1 token
+		- words are split into >1 tokens
+		- For e.g.; Capital -> 77382
+		Capitalization -> 77382 2860
+		ization - 2860
+		1 word != 1 token
+		
+Tokens affect the cost!!!
+- costing in AI is based on token usage (consumption)
+- Prompting 
+
+OpenAI -> GPT -> GPT 5.5
+- OpenAI gave GPT a "default system message" -> You are a helpful assistant
+- User -> you can temporarily change the system message.
+When would you want to set the default system message as something?
+	- creating a "sepcific" model.
+	
+$0.005 / million tokens
+
+Total tokens -> Input (system+user) + output (assistant)
+Free subscription ChatGPT
+- quota insufficient
+
+Control the output: tokens
+Generate a summary of this PDF in not more than 500 words.
+Give the output in JSON format.
+
+1.0 - 5.5 -> reasoning power. 
+
+1000 tokens
+128k tokens
+
+Context Window -> Input + in-between + output
+
+Context Windows Size: Total # of tokens: 8000 tokens.
+System: 	200 tokens
+User: 		100 tokens
+------------------
+Total:  	300 tokens
+Response:	8000 - 300 - 7700 tokens
+
+System: 	200 tokens
+User: 		100 tokens
+Context:   3000 tokens (additional info conversation, text, doc)
+----------------------
+Total:     3300 tokens
+Response:  8000 - 3300 - 4700 tokens
+If the response is > 4700 tokens (max tokens), it will be truncated.
+
+If the total was only 4000 , you pay for 4000.
+
+Tokenization
+Vectorization
+Embedding
+
+How do these LLMs generate the content?
+---------------------------------------
+Based on Probability.
+
+Does not come up with just one word.
+It comes up with a list of words
+It will pick up the most probable word - randomly but context-based.
+
+Input: Write a creative poem on Introduction to Generative AI.
+
+LLM Receives: Write a creative poem on Introduction to Generative AI.
+
+Maybe, it came up with these words:
+In
+Generative
+AI
+Introduction
+to
+
+Picks: Introduction
+
+LLM Receives: 
+Write a creative poem on Introduction to Generative AI.
+Introduction
+
+comes up with:
+to
+is
+where
+AI
+for
+
+picks: to
+Returns:
+Write a creative poem on Introduction to Generative AI.
+Introduction to
+
+LLM Receives: 
+Write a creative poem on Introduction to Generative AI.
+Introduction to _ 
+
+LLM Receives: 
+Write a creative poem on Introduction to Generative AI.
+Introduction to _ _
+
+LLM Receives: 
+Write a creative poem on Introduction to Generative AI.
+Introduction to _ _ _
+
+till it determines the end of the answer.
+
+LLM Architecture:
+"Self-attention"
+
+LLMs have parameters:
+Temperature:
+	- between 0 and 1.
+	- For e.g.; 0 0.1 0.3 0.7 0.9 1
+	- Determines the "creativity" of the answer to be generated
+	- lower the number, the more deterministic
+		- for the same question, same answer.
+		- FAQs
+	- higher the number, the more creative it will be.
+		- ads, blogs, emails
+		
+top-p: 0 - 1 - probablity 
+	- top-p: 0.9 = 90%
+	- consider only words that form the top 90% of the list 
+	
+A-0.35
+B-0.30
+C-0.25
+D-0.20
+E-0.20
+F-0.15
+G-0.10
+
+
+Access to the model: d/l model on our machines and then configure, direct API.
+
+top-k: 25, 500
+- how many words to provide as a probable list of words (chunks) for top-p to pick from.
+
+Azure:
+1) Resource Group
+2) Azure OpenAI service (resource)
+
+
+Day 02:
+=======
+RAG
+give citations giving details about the source, page number, section, chapter.
+
+Prompting Techniques:
+Zero-shot prompting
+One-shot prompting
+Few-shot prompting
+	- 2-3 examples
+	
+AI tool (Agentic WF):
+- input a claim (pdf)
+- read this pdf
+- generate a basic summary
+- extract some insights from the summary
+- highlight risks, compliance issues, ....
+- recommendations
+- final answer (full summary of what it found, actions)
+
+Prompt:
+- Role
+- Context
+	- don't over do it.
+- Output format
+	- Give the response in 5 bullet points
+	- .... in not more than 500 words
+	- .... in JSON format
+	- .... in a tabular format
+- Constraints
+	- don't do this
+	- avoid that
+	- omit this/that
+	
+RAG: Retrieval Augmented Generation
+Grounding / Groundedness:
+	- LLM generates response by referring to specific set of documents/data/sources
+	
+	
+Fine tuning:
+- different from RAG
+
+Credit Rating
+- lot of confidential data - company itself, customers.
+- process, techniques -> niche
+
+Why don't we have our own LLM (model):
+	- data to train and test the model
+	- technical expertise to create these LLM from scratch
+		- NN, LLM
+	- domain expertise
+	- very expensive
+		- resources - compute power, GPUs, servers, data centers
+	- takes a lot of time
+	
+Data Cleansing:
+	- determine what data points to use
+	- validate data - clean - missing, values correct
+		- null values
+	
+We will take an existing (base) model and re-train it on our data.
+- Meta -> Llama3
+	- open source
+	- d/l, install/configure it on your servers and use it
+		- your servers (on-premise, cloud)
+	- train it on your data
+	
+- Also define the beahvior of the model:
+	(OpenAI) gpt 5.1 base model
+	
+- Define the behavior of your model/LLM:
+	- LLM has default "behavior" - system message - "You are an assistant"
+	- System Message: "You are an expert in credit rating. Based on the input determine the financial standing of the company and ........"
+	
+	
+MCP -> Model Context Protocol
+- Extension of Agentic AI
+- earlier versions of models
+	- if it cannot find an answer to a question, it would say "i don't know"
+	
+MCP === API
+MCP -> internally you will make API calls
+when does this trigger? 
+-Autonomous agents
+
+Anthropic Browser: Comet
+- MCP enabled
+
+Coursera -> Started in Comet
+- auto complete
+- assignments
+
+Day 03:
+=======
+Source data/documents:
+	- Chunking + Embedding + Persistence (in the VectorDB) is done only once.
+	- Indexing
+Query:
+	- what is the maternity leave policy?
+		- embed the query (not stored)
+		- search in the VectorDB for relevant chunks using the index
+		
+ChatGPT 1.0 - Nov-2022
+- In Jan'23, a Q about something that happened in Dec'22.
+- I don't know.
+- The model has been trained on data that is atleast 6-8 months old.
+	- Mar/Apr'22
+- Training takes if looottttt of time.
+	- train the LLM on a daily basis
+
+RAG - dynamic - that could change.
+- policy -> can change every year/quarter/half-year.
+
+Doc versions?
+	- maintain versions?
+		- LeavePolicy-2025
+		- LeavePolicy-2026
+	- overwrite - one versions
+		- LeavePolicy
+		
+Query: how many leave days do I get in a year?
+Query: What was the leave days available in 2025?
+
+API-1 -> weather data
+API-2 -> flight status
+
+20 docs -> RAG Source -> Day01
+	- LeavePolicy-2025
+	- LeavePolicy-2026
+
+LLM/Model:
+	- specific -> it can do only one thing: text-embedding-3-small
+	- generic - multi-modal -> they can do a lot of things -> text, image, summarize, text-to-speech
+	
+Day 04:
+=======
+LangChain, LangGraph
+@tool => Decorator -> this function is actually a "tool" for this agentic WF.
+
+foo(param):
+	# code
+	
+v = foo(value)
+
+@tool
+foobar(param):
+	# code
+
+# v = foobar(value)			# Cannot call a tool as a regular method.
+v = foobar.invoke(value)	# Invoke the tool.
+
+Human-in-the-loop:
+Approval from someone.
+
+WF with Microservice
+
+Day 05:
+=======
+Replit
+
+How do we optimize token utilization?
+- Structured output:
+	- in 3-5 bullet points
+	- in less than 500 words
+- How you write your prompts
+	- Don't write very long prompts every time.
+	- do not provide context, info that is not really relevant
+		- confuse the LLM
+	- You don't have specify a "role" every time.
+- using caching
+	- Q&A / FAQ:
+		- queries are more or less the same.
+		- When a query is submitted first time
+			- fetch the results from the LLM
+			- store the result in cache
+		- next time when the same query is submitted
+			- get it from the cache
+			- don't even send the query to the LLM
+		- control how long will the info be available in the cache
+	
+rejecting more often than not, colored people and women.
+equal opportunity employment
+the data that was used train that AI had significantly more cadta about white men.
+
+RAG vs Fine-tuning
+	- more or less static data (does not change frequently, changes very rarely)
+		- Fine-tuning
+	- data that can change regularly (not necessarily daily)
+		- policies, SOPs, work order templates, contracts, coding standards
+		- Leave policy may change every year
+		- RAG (Documents)
+	- Live data
+		- NEITHER RAG NOR Fine-tuning
+		- collect this live data, then use it to retrain your model
+		
+AI Agent vs Agentic AI
+	- AI Agent - singular - a single agent completing a specific task
+	- Agentic AI: >1 agents participating in a "proces" (worfklow) to achieve a task
+
+Information Security (InfoSec)
+	- AI systems are eventually a software
+	- GDPR, PCIDS, SOX, Secure SDLC
